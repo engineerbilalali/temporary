@@ -5,19 +5,27 @@ Bare metal RISC-V assembly task for Spike (no pk) <br>
 
 ## Description
 
-This project demonstrates a simple Fibonacci sequence generator in RISC-V assembly. <br>
-The program computes the first 12 numbers of the Fibonacci sequence and stores them in a finite vector V of length N = 12. <br>
-The Fibonacci sequence is defined as: <br>
-- V(0) = 0 <br>
-- V(1) = 1 <br>
-- V(i) = V(i-1) + V(i-2), for i ≥ 2 <br>
-### Key points: <br>
-- The vector length N is defined as a constant using .equ. <br>
-- Results are stored in memory (array V). <br>
-- The program runs in a bare-metal environment on Spike, without pk. <br>
-- Uses only simple loops and arithmetic instructions. <br>
+This project demonstrates the computation of **absolute sums of triplets** in RISC-V assembly. <br>
+The program takes an input vector `A` of length `3*N` and produces another vector `B` of length `N`, where each element of `B` is the absolute value of the sum of three consecutive elements of `A`. <br>
 
-See docs/BilalAli_Task4.pdf for detailed explanation and console output screenshots. <br>
+### Example: <br>
+- Suppose `N = 4` <br>
+- A = [2, -3, 5, 1, 1, 1, -2, -2, -2, 4, 4, -8] <br>
+- Then: <br>
+  - B[0] = |2 + (-3) + 5| = |4| = 4 <br>
+  - B[1] = |1 + 1 + 1| = |3| = 3 <br>
+  - B[2] = |-2 + (-2) + (-2)| = |-6| = 6 <br>
+  - B[3] = |4 + 4 + (-8)| = |0| = 0 <br>
+- Final result: B = [4, 3, 6, 0] <br>
+### Key points: <br>
+- The vector length `N` is defined using `.equ`. <br>
+- The main program calls a helper function `res_triplet`, which computes the absolute value of the sum of three consecutive elements. <br>
+- A separate function `abs` is implemented to handle absolute values. <br>
+- Register `a0` is used to return values from functions, following the RISC-V calling convention. <br>
+- The program runs in a bare-metal environment on Spike (no pk). <br>
+
+See docs/BilalAli_Task6.pdf for detailed explanation and console output screenshots. <br>
+
 ## Structure
 
 .<br>
