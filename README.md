@@ -5,26 +5,30 @@ Bare metal RISC-V assembly task for Spike (no pk) <br>
 
 ## Description
 
-This project demonstrates the computation of **absolute sums of triplets** in RISC-V assembly. <br>
-The program takes an input vector `A` of length `3*N` and produces another vector `B` of length `N`, where each element of `B` is the absolute value of the sum of three consecutive elements of `A`. <br>
+This project demonstrates how to check **coprimality** of integer pairs using RISC-V assembly. <br>
+The program takes as input a vector `D` of size `3*M`, where each triplet `(xi, yi, ci)` represents: <br>
+- `xi` and `yi`: a pair of positive integers <br>
+- `ci`: initially `0`, later updated as follows: <br>
+  - `ci = 2` if `(xi, yi)` are coprime (gcd = 1) <br>
+  - `ci = 1` otherwise <br>
 
 ### Example: <br>
-- Suppose `N = 4` <br>
-- A = [2, -3, 5, 1, 1, 1, -2, -2, -2, 4, 4, -8] <br>
-- Then: <br>
-  - B[0] = |2 + (-3) + 5| = |4| = 4 <br>
-  - B[1] = |1 + 1 + 1| = |3| = 3 <br>
-  - B[2] = |-2 + (-2) + (-2)| = |-6| = 6 <br>
-  - B[3] = |4 + 4 + (-8)| = |0| = 0 <br>
-- Final result: B = [4, 3, 6, 0] <br>
-### Key points: <br>
-- The vector length `N` is defined using `.equ`. <br>
-- The main program calls a helper function `res_triplet`, which computes the absolute value of the sum of three consecutive elements. <br>
-- A separate function `abs` is implemented to handle absolute values. <br>
-- Register `a0` is used to return values from functions, following the RISC-V calling convention. <br>
-- The program runs in a bare-metal environment on Spike (no pk). <br>
+Input vector: <br>
+`D = (3,5,0, 6,18,0, 15,45,0, 13,10,0, 24,3,0, 24,35,0)` <br>
 
-See docs/BilalAli_Task6.pdf for detailed explanation and console output screenshots. <br>
+Output vector after execution: <br>
+`D = (3,5,2, 6,18,1, 15,45,1, 13,10,2, 24,3,1, 24,35,2)` <br>
+
+### Key points: <br>
+- The number of pairs `M` is defined as a constant using `.equ`. <br>
+- A helper function `check_coprime` is implemented, which: <br>
+  - Calls the `gcd` function. <br>
+  - Updates `ci = 2` if gcd = 1, else `ci = 1`. <br>
+- The Euclidean algorithm is used in `gcd` (same as implemented in earlier tasks). <br>
+- Functions follow the RISC-V ABI calling convention (`a0-a7` for args/returns, `s` registers saved across calls). <br>
+- The program runs in a bare-metal environment on Spike, without pk. <br>
+
+See docs/BilalAli_Assessment1.pdf for detailed explanation and console output screenshots. <br>
 
 ## Structure
 
@@ -50,3 +54,4 @@ To build and and run:
 `make run`
 
 
+ 
