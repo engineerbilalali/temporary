@@ -5,15 +5,21 @@ Bare metal RISC-V assembly task for Spike (no pk) <br>
 
 ## Description
 
-This project demonstrates a simple **Euclidean Algorithm** implementation in RISC-V assembly to compute the Greatest Common Divisor (GCD) of two numbers.  
-It runs in a bare-metal environment on **Spike** without `pk`, using minimal I/O support functions.  
+This task explains the RISC-V calling convention rules regarding:
+Caller-saved registers
+Callee-saved registers
+The rules are defined in the RISC-V ABI Specification (topics 1.1 and 2.1).
+When functions call each other, registers may get overwritten. To prevent losing important data, the ABI defines which side (caller or callee) is responsible for saving/restoring registers.
+#Caller-Saved Registers
+Registers: t0–t6 (temporaries), a0–a7 (argument/return values)
+Rule: The caller must assume these registers will be overwritten by the callee.
+Use case: When the caller needs the value after the function call, it must save it to the stack before calling another function.
+#Callee-Saved Registers
+Registers: s0–s11 (saved registers), plus ra (return address), sp (stack pointer), gp, tp
+Rule: The callee must preserve their values. If the callee wants to use them, it must save them on entry and restore them before returning.
+Use case: Caller can rely on these registers remaining unchanged across function calls.
 
-Algorithm steps:  
-- Compare two numbers.  
-- Subtract the smaller from the larger.  
-- Repeat until both numbers are equal (the GCD).
-
-See `docs/BilalAli_FinalAssessment.pdf` for details and console output screenshots.
+See `docs/BilalAli_Task2.pdf` for details and console output screenshots.
 ## Structure
 
 .<br>
