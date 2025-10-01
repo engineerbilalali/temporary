@@ -5,19 +5,19 @@ Bare metal RISC-V assembly task for Spike (no pk) <br>
 
 ## Description
 
-This project demonstrates a simple Euclidean Algorithm implementation in RISC-V assembly to compute the Greatest Common Divisor (GCD) of two numbers. <br>
-The values of a and b are defined as static variables in the program (.data section). <br>
-The program runs in a bare-metal environment on Spike, without pk. <br>
-No functions are called — the algorithm is implemented in a single assembly flow. <br>
-Uses only loops and conditional branches. <br>
-### Algorithm (Euclidean subtraction method)
-Compare a and b. <br>
-If a > b, replace a = a - b. <br>
-If b > a, replace b = b - a. <br>
-Repeat until a == b. <br>
-The result is the GCD of the two numbers. <br>
+This project demonstrates a simple Fibonacci sequence generator in RISC-V assembly. <br>
+The program computes the first 12 numbers of the Fibonacci sequence and stores them in a finite vector V of length N = 12. <br>
+The Fibonacci sequence is defined as: <br>
+- V(0) = 0 <br>
+- V(1) = 1 <br>
+- V(i) = V(i-1) + V(i-2), for i ≥ 2 <br>
+### Key points: <br>
+- The vector length N is defined as a constant using .equ. <br>
+- Results are stored in memory (array V). <br>
+- The program runs in a bare-metal environment on Spike, without pk. <br>
+- Uses only simple loops and arithmetic instructions. <br>
 
-See docs/BilalAli_Task3.pdf for detailed explanation and console output screenshots. <br>
+See docs/BilalAli_Task4.pdf for detailed explanation and console output screenshots. <br>
 ## Structure
 
 .<br>
